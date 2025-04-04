@@ -17,6 +17,9 @@ document.addEventListener("DOMContentLoaded", async function () {
     speakerContainer.innerHTML = ""; // Clear existing speakers
 
     speakers.forEach((speaker) => {
+      const linkedinProfile =
+        speaker.links.find((link) => link.linkType === "LinkedIn")?.url || "#";
+
       // Find the sessions for this speaker
       const speakerSessions = sessions
         .filter((session) => session.speakers.includes(speaker.id))
@@ -32,7 +35,9 @@ document.addEventListener("DOMContentLoaded", async function () {
           <img src="${speaker.profilePicture || "assets/img/speakers/tbd.png"}" 
                alt="${speaker.fullName}" class="img-fluid" />
           <div class="details">
-            <h3><a href="#">${speaker.fullName}</a></h3>
+            <h3><a href="${linkedinProfile}" target="_blank">${
+        speaker.fullName
+      }</a></h3>
             <p>${speakerSessions || "Session Info Not Available"}</p>
             <div class="social">
               ${speaker.links
